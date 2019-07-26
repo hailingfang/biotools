@@ -114,7 +114,7 @@ class Position_find:
 
     def right_elements_by_len(self, element_seq, position, length):
         dt_out = []
-        right_ele = self.right(element_seq, position)
+        right_ele = self.right_elements(element_seq, position)
         right_cut = position + length
         for ele in right_ele:
             if ele[1] <= right_cut:
@@ -195,6 +195,19 @@ def print_res(contig, start_position, end_position, oritation, left_right_ele, g
         line = '\t'.join(line)
         return line
 
+    def print_line(contig, elements, gff_dt, line_mark, f_out):
+        print(line_mark + (' ' * (8 - len(line_mark))), end='', file=f_out)
+        i = 0
+        if len(elements) > 0:
+            for ele in elements:
+                if i != 0: print(' ' * 8, end='', file=f_out)
+                i += 1
+                line = get_position_infor_line(contig, ele, gff_dt)
+                print(line, file=f_out)
+        else:
+            print(file=f_out)
+        return 0
+
     head_line = '\t'.join(['>', str(start_position), str(end_position), oritation, contig])
     print(head_line, file=f_out)
     if oritation == '+':
@@ -207,34 +220,12 @@ def print_res(contig, start_position, end_position, oritation, left_right_ele, g
         upele = left_right_ele['Right_boundary_right_ele']
         downmid = left_right_ele['Left_boundary_mid_ele']
         downele = left_right_ele['Left_boundary_left_ele']
-    print('UPMID   ', end='', file=f_out)
-    i = 0
-    for ele in upmid:
-        if i != 0: print(' ' * 8, end='', file=f_out)
-        i += 1
-        line= get_position_infor_line(contig, ele, gff_dt)
-        print(line, file=f_out)
-    print('DOWNMID ', end='', file=f_out)
-    i = 0
-    for ele in downmid:
-        if i != 0: print(' ' * 8, end='', file=f_out)
-        i += 1
-        line = get_position_infor_line(contig, ele, gff_dt)
-        print(line, file=f_out)
-    print('UPELE   ', end='', file=f_out)
-    i = 0
-    for ele in upele:
-        if i != 0: print(' ' * 8, end='', file=f_out)
-        i += 1
-        line = get_position_infor_line(contig, ele, gff_dt)
-        print(line, file=f_out)
-    print('DOWNELE ', end='', file=f_out)
-    i = 0
-    for ele in downele:
-        if i != 0: print(' ' * 8, end='', file=f_out)
-        i += 1
-        line = get_position_infor_line(contig, ele, gff_dt)
-        print(line, file=f_out)
+
+    print_line(contig, upmid, gff_dt, 'UPMID', f_out)
+    print_line(contig, downmid, gff_dt, 'DOWNMID', f_out)
+    print_line(contig, upele, gff_dt, 'UPELE', f_out)
+    print_line(contig, downele, gff_dt, 'DOWNELE', f_out)
+
     return 0
 
 
