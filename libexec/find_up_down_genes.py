@@ -122,6 +122,18 @@ class Position_find:
         return dt_out
 
 
+    def elements_offset(self, elements_seq, position, boundary_side):
+        #boundary_sid: {'L', 'R'}
+        dt_out = []
+        if boundary_side == 'L':
+            for ele in elements_seq:
+                dt_out.append([ele, ele[0] - position])
+        elif boundary_side == 'R':
+            for ele in elements_seq:
+                dt_out.append([ele, ele[1] - position])
+        return dt_out
+
+
 def parse_gff_file(gff_file):
 
     def adept_dt_struc(gff_dt):
