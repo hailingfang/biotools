@@ -107,7 +107,7 @@ def handle_multiple_match_and_overlap(blast_res_dt):
 
         return 0
 
-
+    dt_out = {}
     query_pos_liner = {}
     for query_contig in blast_res_dt:
         query_pos_liner[query_contig] = []
@@ -118,8 +118,9 @@ def handle_multiple_match_and_overlap(blast_res_dt):
                 blast_res_dt[query_contig][query_pos] = blast_res_dt[query_contig][query_pos][-1]
             else:
                 blast_res_dt[query_contig][query_pos] = blast_res_dt[query_contig][query_pos][0]
-
-
+    for query_contig in blast_res_dt:
+        pos_dt = blast_res_dt[query_contig]
+        handle_overlap(pos_dt)
 
     return 0
 
