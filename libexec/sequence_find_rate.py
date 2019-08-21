@@ -14,10 +14,10 @@ import fbio.fparse
 def get_args():
     args = argparse.ArgumentParser(description='Calculate similarity between two Nucltide \
         sequence.')
-    args.add_argument('-query_file', required=True, type=str, help='query fasta file.')
-    args.add_argument('-subject_file', required=True, type=str, help='db fasta file.')
+    args.add_argument('-query', required=True, type=str, help='query fasta file.')
+    args.add_argument('-db', required=True, type=str, help='db fasta file.')
     args = args.parse_args()
-    query_file, subject_file = args.query_file, args.subject_file
+    query_file, subject_file = args.query, args.db
 
     return query_file, subject_file
 
@@ -28,8 +28,8 @@ def makeblastdb(subject_file, working_dir):
     opt_in = '-in ' + subject_file
     out_name_dir = os.path.join(working_dir, os.path.basename(subject_file))
     opt_out = '-out ' + out_name_dir
-    cmd = ' '.join([cmd_name, opt_dbtype, opt_in, opt_out])
-    print(cmd)
+    cmd = ' '.join([cmd_name, opt_dbtype, opt_in, opt_out, '&>/dev/null'])
+    # DEBUG: print(cmd)
     os.system(cmd)
     return out_name_dir
 
@@ -41,9 +41,8 @@ def run_balstn(query_file, blast_db_name_dir, working_dir):
     out_res = os.path.join(working_dir, 'blast_res')
     opt_out = '-out ' + out_res
     opt_outfmt = '-outfmt ' + '7'
-
-    cmd = ' '.join([cmd_name, opt_query, opt_db, opt_out, opt_outfmt])
-    print(cmd)
+    cmd = ' '.join([cmd_name, opt_query, opt_db, opt_out, opt_outfmt, '&>/dev/null'])
+    # DEBUG: print(cmd)
     os.system(cmd)
     return out_res
 
@@ -84,8 +83,8 @@ def handle_multiple_match_and_overlap(blast_res_dt):
 
     def get_overlap_range(id_ranges, id_infor):
         dt_out = {}
-        tmp = []
         for Range in id_ranges:
+            tmp = []
             for id in Range:
                 tmp.append(id_infor[id])
             # DEBUG: print(tmp)
@@ -94,12 +93,9 @@ def handle_multiple_match_and_overlap(blast_res_dt):
             tmp.sort(key=lambda x:x[1])
             end = tmp[-1][-1]
             dt_out[(start, end)] = tmp
-            tmp = []
-        print(dt_out)
         return dt_out
 
     def handle_overlap(pos_liner):
-        print(pos_liner)
         pos_marked = []
         i = 0
         id_infor = {}
@@ -124,18 +120,13 @@ def handle_multiple_match_and_overlap(blast_res_dt):
                         tmp = []
                 else:
                     container.append(pos[0])
-        print(id_ranges)
         overlap_range = get_overlap_range(id_ranges, id_infor)
         return overlap_range
 
-    # -------------
     dt_out = {}
-    query_pos_liner = {}
     for query_contig in blast_res_dt:
         # DEBUG: print(query_contig)
-        query_pos_liner[query_contig] = []
         for query_pos in blast_res_dt[query_contig]:
-            query_pos_liner[query_contig].append(query_pos)
             if len(blast_res_dt[query_contig][query_pos]) > 1:
                 # DEBUG: print(blast_res_dt[query_contig][query_pos])
                 blast_res_dt[query_contig][query_pos].sort(key=lambda x:x[0])
@@ -143,8 +134,6 @@ def handle_multiple_match_and_overlap(blast_res_dt):
             else:
                 blast_res_dt[query_contig][query_pos] = blast_res_dt[query_contig][query_pos][0]
     for query_contig in blast_res_dt:
-        print('>>>>>')
-        print(query_contig)
         dt_out[query_contig] = {}
         pos_dt = blast_res_dt[query_contig]
         overlap_range = handle_overlap(pos_dt)
@@ -176,17 +165,18 @@ def cal_align_rate(align_block_dt, query_file):
 
 
 def main():
+    query_file, subject_file = get_args()
     time_now = time.strftime('%Y%m%d%H%M%S')
     working_dir = 'working_dir_' + time_now
     if not os.path.exists(working_dir):
         os.mkdir(working_dir)
-    query_file, subject_file = get_args()
     blast_db_name_dir = makeblastdb(subject_file, working_dir)
     blast_res = run_balstn(query_file, blast_db_name_dir, working_dir)
     blast_res_dt = parse_blastn_res(blast_res)
     align_block_dt = handle_multiple_match_and_overlap(blast_res_dt)
     query_len, align_len, align_rate = cal_align_rate(align_block_dt, query_file)
-    print(query_len, align_len, align_rate)
+    print('query_length', 'aligned_lenght','aligned_ratio', sep='\t')
+    print(query_len, align_len, align_rate, sep='\t')
     return 0
 
 
