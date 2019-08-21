@@ -177,7 +177,6 @@ def cal_align_rate(align_block_dt, query_file):
 
 def main():
     time_now = time.strftime('%Y%m%d%H%M%S')
-    print(time_now)
     working_dir = 'working_dir_' + time_now
     if not os.path.exists(working_dir):
         os.mkdir(working_dir)
