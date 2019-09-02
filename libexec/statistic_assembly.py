@@ -1,9 +1,9 @@
-#! /usr/bin/env python3 
+#! /usr/bin/env python3
 
 import copy
 class Fasta_parse:
     """
-    this class was writed to parse fasta file. 
+    this class was writed to parse fasta file.
 
     And there are three methods within class. fist is __inint__, to add data and seq_heads attibution to Instance. The second is fasta_print, to print self.data back to fasta file, and the length of fasta file line can be modifed by argrment 'line_len', dauflt length is 80 characters. The third is join_lines, which will modified self.data, and make value into a line
 
@@ -62,7 +62,7 @@ class Fasta_parse:
 
 
     def summary_data(self):
-        data=copy.deepcopy(self.data) 
+        data=copy.deepcopy(self.data)
         for key in data:
             data[key]=''.join(data[key])
         len_list=[len(data[key]) for key in data]
@@ -73,7 +73,7 @@ class Fasta_parse:
         max_len=len_list[-1]
         min_len=len_list[0]
         ava_len=float(format(total_len/num_seq,'0.2f')) if num_seq>0 else 0
-        
+
         N50=0
         half_total_len=total_len/2
         start=0
@@ -101,7 +101,7 @@ class Fasta_parse:
                 print(part)
                 i+=line_len
                 part=whole_line[i:i+line_len]
-   
+
 
 
 
@@ -130,7 +130,7 @@ class Fasta_parse:
 
 
 def statistic_assembly(data):
-    
+
     data_sta={}
     len_list=[]
     for head in data:
@@ -190,7 +190,7 @@ print('file_name,totall_len,num_contig,Max_len,Min_len,ava_len,GC_content,N50,L5
 for ff in all_files:
     file_dt=Fasta_parse(ff)
     totall_len,num_contig,Max_len,Min_len,ava_len,GC_content,N50,L50=statistic_assembly(file_dt.data)
-    print(os.path.basename(ff),totall_len,num_contig,Max_len,Min_len,ava_len,GC_content,N50,L50,sep=',')    
+    print(os.path.basename(ff),totall_len,num_contig,Max_len,Min_len,ava_len,GC_content,N50,L50,sep=',')
 
 
 
@@ -198,3 +198,19 @@ for ff in all_files:
 
 
 
+import argparse
+import fbio.fparse
+
+
+def get_args():
+    return 0
+
+
+def main(name='statistic_assembly', args=None):
+    myname = 'statistic_assembly'
+    return 0
+
+
+
+if __name__ == '__main__':
+    main()
