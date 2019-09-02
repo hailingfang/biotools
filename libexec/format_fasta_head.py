@@ -22,10 +22,12 @@ def deal_field(field):
                 ele_range = list(range(ele2, ele1+1))
                 ele_range = ele_range[::-1]
             dt_out += ele_range
+        else:
+            raise Exception('field wrong.')
     return dt_out
 
 
-def getargs():
+def getargs(args_in):
     args = argparse.ArgumentParser(description='Format fasta file head line.')
     args.add_argument('-fasta_file', required=True, help='fasta file name.')
     args.add_argument('-sep_split', default='\s', choices=['_', '-', '.', ',', 't', 's'], \
@@ -34,15 +36,18 @@ def getargs():
         help = 'seperator to link fildes.')
     args.add_argument('-field', nargs='+', required=True, help='field want to keep.')
     args.add_argument('-f_out', default=sys.stdout, help='out file name.')
-    args = args.parse_args()
+    if args_in == None:
+        args = args.parse_args()
+    else:
+        args = args.parse_args(args_in)
     fasta_file, sep_split, field, sep_link, f_out = args.fasta_file, args.sep_split, args.field, \
         args.sep_link, args.f_out
     if sep_split == 's':
-        sep_split = '\s'
+        sep_split = ' '
     elif sep_split == 't':
         sep_split = '\t'
     if sep_link == 's':
-        sep_link = '\s'
+        sep_link = ' '
     elif sep_link == 't':
         sep_link = '\t'
     field = deal_field(field)
@@ -61,7 +66,7 @@ def format_head(fasta_dt, sep_split, field, sep_link):
         new_head = []
         head_ele = head.split(sep_split)
         for i in field:
-            new_head.append(head_ele[i-1])
+            new_head.append(head_ele[i - 1])
         new_head = sep_link.join(new_head)
         dt_out[new_head] = fasta_dt[head]
     return dt_out
@@ -78,13 +83,10 @@ def print_res(fasta_dt, f_out):
     return 0
 
 
-def main(name='format_fasta_head', args=[]):
+def main(name='format_fasta_head', args=None):
     myname = 'format_fasta_head'
     if name == myname:
-        if args:
-            fasta_file, sep_split, field, sep_link, f_out = getargs(args)
-        else:
-            fasta_file, sep_split, field, sep_link, f_out = getargs()
+        fasta_file, sep_split, field, sep_link, f_out = getargs(args)
         fasta_dt = struc_fasta(fasta_file)
         fasta_dt = format_head(fasta_dt, sep_split, field, sep_link)
         print_res(fasta_dt,f_out)
