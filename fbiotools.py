@@ -4,12 +4,11 @@ import argparse
 import sys
 
 import libexec.format_fasta_head
-
+import libexec.statistic_assembly
 
 def get_args():
     args = argparse.ArgumentParser(description='fbiotools.', formatter_class=argparse.RawDescriptionHelpFormatter)
-    args.add_argument('cmd_name', help='''subcommand name.\
-        \n    format_fasta_head\n''')
+    args.add_argument('cmd_name', help='subcommand name. [format_fasta_head, stat_assembly]')
     args.add_argument('cmd_args', nargs='*', help='argument of subcommand.')
     args = args.parse_args([sys.argv[1]])
     cmd_name, cmd_args = args.cmd_name, sys.argv[2:]
@@ -19,9 +18,9 @@ def get_args():
 def main():
     cmd_name, cmd_args = get_args()
     libexec.format_fasta_head.main(cmd_name, cmd_args)
+    libexec.statistic_assembly.main(cmd_name, cmd_args)
     return 0
 
 
-
-
-main()
+if __name__ == '__main__':
+    main()
