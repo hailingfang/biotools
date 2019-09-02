@@ -7,9 +7,9 @@ import libexec.format_fasta_head
 
 
 def get_args():
-    args = argparse.ArgumentParser()
-    args.add_argument('cmd_name', help='subcommand name.\
-        \n    format_fasta_head\n')
+    args = argparse.ArgumentParser(description='fbiotools.', formatter_class=argparse.RawDescriptionHelpFormatter)
+    args.add_argument('cmd_name', help='''subcommand name.\
+        \n    format_fasta_head\n''')
     args.add_argument('cmd_args', nargs='*', help='argument of subcommand.')
     args = args.parse_args([sys.argv[1]])
     cmd_name, cmd_args = args.cmd_name, sys.argv[2:]

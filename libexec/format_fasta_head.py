@@ -28,7 +28,7 @@ def deal_field(field):
 
 
 def getargs(args_in):
-    args = argparse.ArgumentParser(description='Format fasta file head line.')
+    args = argparse.ArgumentParser(prog='format_fasta_head', description='Format fasta file head line.', add_help=False)
     args.add_argument('-fasta_file', required=True, help='fasta file name.')
     args.add_argument('-sep_split', default='\s', choices=['_', '-', '.', ',', 't', 's'], \
         help='seperator to split head string.')
