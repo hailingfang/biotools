@@ -9,8 +9,8 @@ import libexec.phytree_statistic
 import libexec.statistic_phytree
 
 def get_args():
-    args = argparse.ArgumentParser(description='fbiotools.', formatter_class=argparse.RawDescriptionHelpFormatter)
-    args.add_argument('cmd_name', help='subcommand name. [format_fasta_head, stat_assembly]')
+    args = argparse.ArgumentParser(description='fbiotools.')
+    args.add_argument('cmd_name', help='subcommand name.')
     args.add_argument('cmd_args', nargs='*', help='argument of subcommand.')
     args = args.parse_args([sys.argv[1]])
     cmd_name, cmd_args = args.cmd_name, sys.argv[2:]
