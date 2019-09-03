@@ -13,7 +13,7 @@ def get_args(args_in):
         args = args.parse_args()
     else:
         args = args.parse_args(args_in)
-    tree_file, f_out = args.tree_file
+    tree_file, f_out = args.tree_file, args.f_out
     return tree_file, f_out
 
 
@@ -56,7 +56,7 @@ def print_res(dt, f_out):
 
 
 def main(name='phytree_statistic', args=None):
-    myname = 'phytree_statistic'
+    myname = 'statistic_phytree'
     if myname == name:
         tree_file, f_out = get_args(args)
         tree = ete3.Tree(tree_file)

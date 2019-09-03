@@ -5,6 +5,8 @@ import sys
 
 import libexec.format_fasta_head
 import libexec.statistic_assembly
+import libexec.phytree_statistic
+import libexec.statistic_phytree
 
 def get_args():
     args = argparse.ArgumentParser(description='fbiotools.', formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -19,6 +21,8 @@ def main():
     cmd_name, cmd_args = get_args()
     libexec.format_fasta_head.main(cmd_name, cmd_args)
     libexec.statistic_assembly.main(cmd_name, cmd_args)
+    libexec.phytree_statistic.main(cmd_name, cmd_args)
+    libexec.statistic_phytree.main(cmd_name, cmd_args)
     return 0
 
 

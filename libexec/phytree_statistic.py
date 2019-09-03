@@ -13,7 +13,7 @@ def get_args(args_in):
         args = args.parse_args()
     else:
         args = args.parse_args(args_in)
-    tree_file, f_out = args.tree_file
+    tree_file, f_out = args.tree_file, args.f_out
     return tree_file, f_out
 
 
