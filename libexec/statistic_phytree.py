@@ -6,7 +6,7 @@ import sys
 
 
 def get_args(args_in):
-    args = argparse.ArgumentParser(prog='phytree_statistic', description='statistic phylogenetice tree.')
+    args = argparse.ArgumentParser(prog='statistic_phytree', description='statistic phylogenetice tree.')
     args.add_argument('tree_file', type=str, help='tree file name.')
     args.add_argument('-f_out', default=sys.stdout, help='out file name.')
     if args_in == None:
@@ -65,7 +65,7 @@ def main(name='phytree_statistic', args=None):
         dt = [max_edge_len, max_topology_len, shortest_leaf, longest_leaf, leaf_ave_len]
         print_res(dt, f_out)
     return 0
-
+    
 
 if __name__ == '__main__':
     main()
