@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+
 import argparse
 import ete3
 
@@ -44,4 +45,3 @@ if __name__ == '__main__':
     print('shortest_leaf:',shortest_leaf)
     print('longest_leaf:',longest_leaf)
     print('leaf_ave_len:',leaf_ave_len)
-
