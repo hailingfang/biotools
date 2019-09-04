@@ -3,15 +3,18 @@
 import argparse
 import sys
 
+
 import libexec.format_fasta_head
 import libexec.statistic_assembly
 import libexec.phytree_statistic
 import libexec.statistic_phytree
 
+
 def get_args():
     args = argparse.ArgumentParser(description='fbiotools.')
     args.add_argument('cmd_name', help='subcommand name.')
-    args.add_argument('cmd_args', nargs='*', help='argument of subcommand.')
+    args.add_argument('cmd_args', nargs='*', help="argument of subcommand.[format_fasta_head, \
+        statistic_assembly, phytree_statistic, statistic_phytree]")
     args = args.parse_args([sys.argv[1]])
     cmd_name, cmd_args = args.cmd_name, sys.argv[2:]
     return cmd_name, cmd_args
