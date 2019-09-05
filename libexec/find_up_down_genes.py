@@ -8,9 +8,9 @@ import sys
 import fbio.fparse
 
 
-def get_args():
+def get_args(args_in):
     args = argparse.ArgumentParser(description='This utility is aimed to find \
-        find out up and down stream genes of location.')
+        find out up and down stream genes of location.', prog='find_up_down_genes')
     args.add_argument('contig', type=str, help='contig index')
     args.add_argument('start_position', type=int, help='start position of a location.')
     args.add_argument('end_position', type=int, help='end position of a location.')
@@ -22,7 +22,10 @@ def get_args():
         help='gene number range of up and down stream that offer genes of it')
     args.add_argument('-f_out', type=str, default=sys.stdout, help='result outputing file. \
         stdout as default.')
-    args = args.parse_args()
+    if args_in == None:
+        args = args.parse_args()
+    else:
+        args = args.parse_args(args_in)
     contig, start_position, end_position, gff_file, range, range_type, f_out = \
         args.contig, args.start_position, args.end_position, args.gff_file, \
         args.range, args.range_type, args.f_out
@@ -121,7 +124,6 @@ class Position_find:
                 dt_out.append(ele)
         return dt_out
 
-
     def elements_offset(self, elements_seq, position, boundary_side):
         #boundary_sid: {'L', 'R'}
         dt_out = []
@@ -219,7 +221,8 @@ def print_res(contig, start_position, end_position, oritation, left_right_ele, g
         else:
             print(file=f_out)
         return 0
-
+    if f_out != sys.stdout:
+        f_out = open(f_out, 'w')
     head_line = '\t'.join(['>', str(start_position), str(end_position), oritation, contig])
     print(head_line, file=f_out)
     if oritation == '+':
@@ -237,19 +240,20 @@ def print_res(contig, start_position, end_position, oritation, left_right_ele, g
     print_line(contig, downmid, gff_dt, 'DOWNMID', f_out)
     print_line(contig, upele, gff_dt, 'UPELE', f_out)
     print_line(contig, downele, gff_dt, 'DOWNELE', f_out)
-
+    f_out.close()
     return 0
 
 
-def main():
-    contig, start_position, end_position, gff_file, range, range_type, f_out = get_args()
-    gff_dt = parse_gff_file(gff_file)
-    left_right_ele, oritation = get_left_right_ele(contig, start_position, end_position, range, range_type, gff_dt)
-    # DEBUG: print(left_right_ele)
-    # DEBUG: print(oritation)
-    if f_out != sys.stdout: f_out = open(f_out, 'w')
-    print_res(contig, start_position, end_position, oritation, left_right_ele, gff_dt, f_out)
-    if f_out != sys.stdout: f_out.close()
+def main(name='find_up_down_genes', args=None):
+    myname = 'find_up_down_genes'
+    if name == myname:
+        contig, start_position, end_position, gff_file, range, range_type, f_out \
+            = get_args(args)
+        gff_dt = parse_gff_file(gff_file)
+        left_right_ele, oritation = get_left_right_ele(contig, start_position, \
+            end_position, range, range_type, gff_dt)
+        print_res(contig, start_position, end_position, oritation, left_right_ele, \
+            gff_dt, f_out)
     return 0
 
 
