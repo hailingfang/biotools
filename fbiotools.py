@@ -14,8 +14,9 @@ import libexec.find_up_down_genes
 def get_args():
     args = argparse.ArgumentParser(description='fbiotools.')
     args.add_argument('cmd_name', help='subcommand name.')
-    args.add_argument('cmd_args', nargs='*', help="argument of subcommand.[format_fasta_head, \
-        statistic_assembly, phytree_statistic, statistic_phytree, find_up_down_genes]")
+    args.add_argument('cmd_args', nargs='*', help="argument of subcommand.\
+        [format_fasta_head, statistic_assembly, phytree_statistic, \
+        statistic_phytree, find_up_down_genes]")
     args = args.parse_args([sys.argv[1]])
     cmd_name, cmd_args = args.cmd_name, sys.argv[2:]
     return cmd_name, cmd_args
