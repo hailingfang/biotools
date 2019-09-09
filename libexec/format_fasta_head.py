@@ -30,10 +30,8 @@ def deal_field(field):
 def getargs(args_in):
     args = argparse.ArgumentParser(prog='format_fasta_head', description='Format fasta file head line.')
     args.add_argument('-fasta_file', required=True, help='fasta file name.')
-    args.add_argument('-sep_split', default='\s', choices=['_', '-', '.', ',', 't', 's'], \
-        help='seperator to split head string.')
-    args.add_argument('-sep_link', default='\s', choices=['_', '-', '.', ',', 't', 's'], \
-        help = 'seperator to link fildes.')
+    args.add_argument('-sep_split', default='\s', help='seperator to split head string.')
+    args.add_argument('-sep_link', default='\s', help = 'seperator to link fildes.')
     args.add_argument('-field', nargs='+', required=True, help='field want to keep.')
     args.add_argument('-f_out', default=sys.stdout, help='out file name.')
     if args_in == None:
@@ -42,13 +40,13 @@ def getargs(args_in):
         args = args.parse_args(args_in)
     fasta_file, sep_split, field, sep_link, f_out = args.fasta_file, args.sep_split, args.field, \
         args.sep_link, args.f_out
-    if sep_split == 's':
+    if sep_split == r'\s':
         sep_split = ' '
-    elif sep_split == 't':
+    elif sep_split == r'\t':
         sep_split = '\t'
-    if sep_link == 's':
+    if sep_link == r'\s':
         sep_link = ' '
-    elif sep_link == 't':
+    elif sep_link == r'\t':
         sep_link = '\t'
     field = deal_field(field)
     return fasta_file, sep_split, field, sep_link, f_out
