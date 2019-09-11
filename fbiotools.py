@@ -9,6 +9,7 @@ import libexec.statistic_assembly
 import libexec.phytree_statistic
 import libexec.statistic_phytree
 import libexec.find_up_down_genes
+import libexec.phytree_groups
 
 
 def get_args():
@@ -29,6 +30,7 @@ def main():
     libexec.phytree_statistic.main(cmd_name, cmd_args)
     libexec.statistic_phytree.main(cmd_name, cmd_args)
     libexec.find_up_down_genes.main(cmd_name, cmd_args)
+    libexec.phytree_groups.main(cmd_name, cmd_args)
     return 0
 
 
