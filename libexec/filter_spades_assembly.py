@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-import fbio.fparse
+import biolib.bioparse
 
 def get_args():
     args = argparse.ArgumentParser(description='filter assembly result of spades \

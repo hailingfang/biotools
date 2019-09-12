@@ -8,7 +8,7 @@
 import argparse
 import os
 import time
-import fbio.fparse
+import biolib.bioparse
 
 
 def get_args():

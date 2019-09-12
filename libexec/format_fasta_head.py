@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse
-import fbio.fparse
+import biolib.bioparse
 import re
 import sys
 
