@@ -23,20 +23,6 @@ def getargs(args_in):
     return treefile, edge_len_cutoff, f_cluster_res, f_profile_tree
 
 
-def print_cluster_res(circle_node_tree, f_cluster_res):
-    f_out = open(f_cluster_res, 'w')
-    circle_node_tree.split_inner_tree()
-    for node in circle_node_tree.traverse():
-        print('>' + node.name, file=f_out)
-        print('@' + node.base_inner_node.write(), file=f_out)
-        inner_node = node.get_inner_node()
-        for inner_node_ele in inner_node:
-            if inner_node_ele.name != '':
-                print(inner_node_ele.name, file=f_out)
-    f_out.close()
-    return 0
-
-
 def main(name='phytree_groups', args=[]):
     myname = 'phytree_groups'
     if name == myname:
@@ -45,7 +31,7 @@ def main(name='phytree_groups', args=[]):
         circle_node_tree = circle_node_tree.circle_node_tree
         profile_tree = circle_node_tree.make_profile_tree()
         print(profile_tree.write(), file=open(f_profile_tree, 'w'))
-        print_cluster_res(circle_node_tree, f_cluster_res)
+        circle_node_tree.print_cluster(f_cluster_res)
     return 0
 
 
