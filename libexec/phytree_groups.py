@@ -24,19 +24,15 @@ def getargs(args_in):
 
 
 def print_cluster_res(circle_node_tree, f_cluster_res):
-
-    def traverse_tree(circle_node_tree, f_out):
-        print('>' + circle_node_tree.name, file=f_out)
-        inner_node = circle_node_tree.get_inner_node()
-        for node in inner_node:
-            if node.name != '':
-                print(node.name, file=f_out)
-        for child in circle_node_tree.get_children_node():
-            traverse_tree(child, f_out)
-        return 0
-
     f_out = open(f_cluster_res, 'w')
-    traverse_tree(circle_node_tree, f_out)
+    circle_node_tree.split_inner_tree()
+    for node in circle_node_tree.traverse():
+        print('>' + node.name, file=f_out)
+        print('@' + node.base_inner_node.write(), file=f_out)
+        inner_node = node.get_inner_node()
+        for inner_node_ele in inner_node:
+            if inner_node_ele.name != '':
+                print(inner_node_ele.name, file=f_out)
     f_out.close()
     return 0
 
