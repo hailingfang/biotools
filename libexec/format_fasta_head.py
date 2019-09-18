@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse
-import biolib.bioparse
+import biolib.bioparser
 import re
 import sys
 
@@ -53,7 +53,7 @@ def getargs(args_in):
 
 
 def struc_fasta(fasta_file):
-    fasta_dt = fbio.fparse.Fasta_parse(fasta_file)
+    fasta_dt = fbio.fparser.Fasta_parser(fasta_file)
     fasta_dt = fasta_dt.data
     return fasta_dt
 
