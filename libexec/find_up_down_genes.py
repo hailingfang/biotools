@@ -5,7 +5,7 @@ The gff file data needed as basic data.
 '''
 import argparse
 import sys
-import biolib.bioparse
+import biolib.bioparser
 
 
 def get_args(args_in):
