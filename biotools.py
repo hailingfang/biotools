@@ -21,7 +21,7 @@ def getargs():
     Description = \
     '''
 Tools for bioinformatics.
-The flowing tools/subcommand was suported:
+The flowing tools/subcommand was supported:
 
     * format_fasta_head
     * format_table_separater
