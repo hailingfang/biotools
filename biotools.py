@@ -12,15 +12,14 @@ import libexec.statistic_phytree
 import libexec.statistic_assembly
 import libexec.find_updown_elements
 import libexec.phytree_statistic
-import libexec.phytree_groups
+import libexec.phytree_cluster
 import libexec.phytree_collapse
 import libexec.phytree_show
 
 
 def getargs():
     Description = \
-    '''
-Tools for bioinformatics.
+'''Tools for bioinformatics.
 The flowing tools/subcommand was supported:
 
     * format_fasta_head
@@ -30,10 +29,10 @@ The flowing tools/subcommand was supported:
     * statistic_phytree
     * find_updown_elements
     * phytree_statistic
-    * phytree_groups
+    * phytree_cluster
     * phytree_collapse
     * phytree_show
-    '''
+'''
     parser = argparse.ArgumentParser(prog='biotools')
     parser.add_argument('cmd_name', help='subcommand name.')
     parser.add_argument('cmd_args', nargs='*', help="subcommand arguments.")
@@ -53,7 +52,7 @@ The flowing tools/subcommand was supported:
     'statistic_phytree',
     'find_updown_elements',
     'phytree_statistic',
-    'phytree_groups',
+    'phytree_cluster',
     'phytree_collapse',
     'phytree_show'
     ]
@@ -72,7 +71,7 @@ def main():
     libexec.statistic_assembly.main(cmd_name, cmd_args)
     libexec.statistic_phytree.main(cmd_name, cmd_args)
     libexec.find_updown_elements.main(cmd_name, cmd_args)
-    libexec.phytree_groups.main(cmd_name, cmd_args)
+    libexec.phytree_cluster.main(cmd_name, cmd_args)
     libexec.phytree_collapse.main(cmd_name, cmd_args)
     libexec.phytree_statistic.main(cmd_name, cmd_args)
     libexec.phytree_show.main(cmd_name, cmd_args)

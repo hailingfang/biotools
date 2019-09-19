@@ -23,14 +23,14 @@ def getargs(args_in):
     return treefile, edge_len_cutoff, f_cluster_res, f_profile_tree
 
 
-def main(name='phytree_groups', args=None):
-    myname = 'phytree_groups'
+def main(name='phytree_cluster', args=None):
+    myname = 'phytree_cluster'
     if name == myname:
         treefile, edge_len_cutoff, f_cluster_res, f_profile_tree = getargs(args)
         circle_node_tree = CircleNodeTree(treefile, edge_len_cutoff)
         circle_node_tree = circle_node_tree.circle_node_tree
         profile_tree = circle_node_tree.make_profile_tree()
-        print(profile_tree.write(), file=open(f_profile_tree, 'w'))
+        print(profile_tree.write(features=['name']), file=open(f_profile_tree, 'w'))
         circle_node_tree.print_cluster(f_cluster_res)
     return 0
 
