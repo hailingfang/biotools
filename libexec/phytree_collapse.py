@@ -20,12 +20,16 @@ def getargs(args_in):
         which can not coexist with "leaf_name_remove".')
     parser_cluster_exclusive.add_argument('-LR', '--leaf_name_remove',default=None, help='leaf name that want remove, \
         which can not coexist with "leaf_name_keep".')
-    if args_in:
-        args = parser.parse_args(args_in)
-        method = args_in[0]
-    else:
+    if args_in==None:
         args = parser.parse_args()
+        if len(sys.argv) == 1:
+            parser.parse_args(['-h'])
         method = sys.argv[1]
+    else:
+        args = parser.parse_args(args_in)
+        if len(args_in) == 0:
+            parser.parse_args(['-h'])
+        method = args_in[0]
     return method, args
 
 
@@ -64,7 +68,7 @@ def collapse_cluster(treefile, edge_len_cutoff, leaf_name_keep, leaf_name_remove
     return 0
 
 
-def main(name='phytree_collapse', args=[]):
+def main(name='phytree_collapse', args=None):
     myname = 'phytree_collapse'
     if myname == name:
         method, args = getargs(args)

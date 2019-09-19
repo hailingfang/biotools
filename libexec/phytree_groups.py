@@ -14,16 +14,16 @@ def getargs(args_in):
         file name to output cluster result, default is "cluster.fasta".')
     args.add_argument('-f_profile_tree', type=str, default='profile.nwk', help='\
         CircleNode Tree profile tree file. default is "profile.nwk".')
-    if args_in:
-        args =args.parse_args(args_in)
+    if args_in == None:
+        args =args.parse_args()
     else:
-        args = args.parse_args()
+        args = args.parse_args(args_in)
     treefile, edge_len_cutoff, f_cluster_res, f_profile_tree = args.treefile, \
         args.edge_len_cutoff, args.f_cluster_res, args.f_profile_tree
     return treefile, edge_len_cutoff, f_cluster_res, f_profile_tree
 
 
-def main(name='phytree_groups', args=[]):
+def main(name='phytree_groups', args=None):
     myname = 'phytree_groups'
     if name == myname:
         treefile, edge_len_cutoff, f_cluster_res, f_profile_tree = getargs(args)
