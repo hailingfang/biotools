@@ -30,8 +30,8 @@ def deal_field(field):
 def getargs(args_in):
     args = argparse.ArgumentParser(prog='format_fasta_head', description='Format fasta file head line.')
     args.add_argument('-fasta_file', required=True, help='fasta file name.')
-    args.add_argument('-sep_split', default='\s', help='seperator to split head string.')
-    args.add_argument('-sep_link', default='\s', help = 'seperator to link fildes.')
+    args.add_argument('-sep_split', default=' ', help='seperator to split head string.')
+    args.add_argument('-sep_link', default=' ', help = 'seperator to link fildes.')
     args.add_argument('-field', nargs='+', required=True, help='field want to keep.')
     args.add_argument('-f_out', default=sys.stdout, help='out file name.')
     if args_in == None:
@@ -53,7 +53,7 @@ def getargs(args_in):
 
 
 def struc_fasta(fasta_file):
-    fasta_dt = fbio.fparser.Fasta_parser(fasta_file)
+    fasta_dt = biolib.fparser.Fasta_parser(fasta_file)
     fasta_dt = fasta_dt.data
     return fasta_dt
 
