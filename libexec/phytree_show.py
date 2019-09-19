@@ -15,10 +15,10 @@ def getargs(args_in):
     parser.add_argument('--show_branch_support', action='store_true', help='show branch support.')
     parser.add_argument('--align_leaf_name', action='store_true', help='align leaf name')
     parser.add_argument('--hide_inner_node', action='store_true', help='hide inner node.')
-    if args_in:
-        args = parser.parse_args(args_in)
-    else:
+    if args_in == None:
         args = parser.parse_args()
+    else:
+        args = parser.parse_args(args_in)
     nwkfile, tree_mode, show_leaf_name, show_branch_length, show_branch_support, align_leaf_name, \
         hide_inner_node = args.nwkfile, args.tree_mode, args.show_leaf_name, args.show_branch_length, \
         args.show_branch_support, args.align_leaf_name, args.hide_inner_node
@@ -44,7 +44,7 @@ def _hide_inner_node(tree):
     return 0
 
 
-def main(name='phytree_show', args=[]):
+def main(name='phytree_show', args=None):
     myname = 'phytree_show'
     if name == myname:
         nwkfile, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
