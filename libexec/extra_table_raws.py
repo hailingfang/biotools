@@ -15,6 +15,7 @@ def getargs(args_in):
         same between tables.')
     parser.add_argument('-SFL', '--show_first_line', action='store_true', help='print first \
         line and exit.')
+    parser.add_argument('-UT', '--unite_table', action='store_true', help='unite tables and exit.')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-FH', '--field_head', type=str, help='field identified by head keyword.')
     group.add_argument('-FC', '--field_column', type=int, help='field identified by column number.')
@@ -24,10 +25,10 @@ def getargs(args_in):
     else:
         args = parser.parse_args(args_in)
     table_file, separater, no_head, field_head, field_column, filter_value, show_first_line, \
-        unite_key = args.table_file, args.separater, args.no_head, args.field_head, \
-        args.field_column, args.filter_value, args.show_first_line, args.unite_key
+        unite_key, unint_table = args.table_file, args.separater, args.no_head, args.field_head, \
+        args.field_column, args.filter_value, args.show_first_line, args.unite_key, args.unint_table
     return table_file, separater, no_head, field_head, field_column, filter_value, \
-        show_first_line, unite_key
+        show_first_line, unite_key, unint_table
 
 
 def unint_table(table_file, separater, no_head, unite_key):
@@ -94,7 +95,7 @@ def main(name='extra_table_raws', args=None):
     if name == myname:
         separater_map = {r'\t':'\t', r'\s':' ', r'\n':'\n'}
         table_file, separater, no_head, field_head, field_column, filter_value, \
-            show_first_line, unite_key = getargs(args)
+            show_first_line, unite_key, unint_table = getargs(args)
         separater = separater_map.get(separater, separater)
         table_line = unint_table(table_file, separater, no_head, unite_key)
         if show_first_line:
@@ -103,8 +104,11 @@ def main(name='extra_table_raws', args=None):
             else:
                 print(separater.join(table_line))
         else:
-            picked_table = pick_column(table_line, no_head, field_head, field_column, \
-                filter_value)
+            if unint_table:
+                picked_table=table_line
+            else:
+                picked_table = pick_column(table_line, no_head, field_head, field_column, \
+                    filter_value)
             if separater == None:
                 for line in picked_table:
                     print('\t'.join(line))
