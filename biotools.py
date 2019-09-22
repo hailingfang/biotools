@@ -34,6 +34,7 @@ The flowing tools/subcommand was supported:
     * phytree_show
 '''
     parser = argparse.ArgumentParser(prog='biotools')
+    parser.add_argument('-V', '--version', action='version', version='%(prog)s 0.1')
     parser.add_argument('cmd_name', help='subcommand name.')
     parser.add_argument('cmd_args', nargs='*', help="subcommand arguments.")
     if len(sys.argv) == 1:
