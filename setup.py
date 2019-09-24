@@ -6,6 +6,7 @@ setup(
     name='biotools',
     version='0.1',
     packages=find_packages(),
+    required_packages=['biolib'],
     author='Benjamin Fang',
     author_email='benjaminfang.ol@outlook.com',
     descrition='tools collection for bioinformatics.',

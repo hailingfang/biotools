@@ -13,7 +13,7 @@ def getargs(args_in):
     parser_cluster.add_argument('treefile', help='phylogenetic tree file name in newike \
         format.')
     parser_cluster.add_argument('edge_len_cutoff', type=float, help='edge length to cluster.')
-    parser_cluster.add_argument('-cluster_result', default='cluster_result', help='cluster result.')
+    parser_cluster.add_argument('-cluster_result', default='cluster.nwk', help='cluster result.')
     parser_cluster.add_argument('-collapse_tree', default='collapse_tree.nwk', help='collapse tree')
     parser_cluster_exclusive = parser_cluster.add_mutually_exclusive_group()
     parser_cluster_exclusive.add_argument('-LK', '--leaf_name_keep', default=None, help='leaf name that want keep, \
