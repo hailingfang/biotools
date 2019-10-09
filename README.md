@@ -3,7 +3,7 @@
 
 ## table of contents  
 * [Introduction](#Introduction)
-* [Requirements](#Requirement)
+* [Requirements](#Requirements)
 * [Installation](#Installation)
 * [Usage](#Usage)   
 
