@@ -4,7 +4,7 @@ Biotools is an integrated toolset for bioinformatics.
 ## table of contents  
 * [Introduction](#Introduction)
 * [Requirements](#Requirements)
-* [Install](#Installation)
+* [Install](#Install)
 * [Usage](#Usage)
     * phytree_statistic  
     * phytree_cluster   
