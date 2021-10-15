@@ -8,7 +8,7 @@
 import argparse
 import os
 import time
-import biolib.bioparse
+import biobrary
 
 
 def get_args():
@@ -145,7 +145,7 @@ def handle_multiple_match_and_overlap(blast_res_dt):
 
 
 def cal_align_rate(align_block_dt, query_file):
-    query_dt = fbio.fparse.Fasta_parse(query_file)
+    query_dt = biobrary.bioparser.Fasta_parse(query_file)
     query_dt.join_lines()
     query_dt = query_dt.data
     query_len = 0

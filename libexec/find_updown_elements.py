@@ -5,7 +5,7 @@ The gff file data needed as basic data.
 '''
 import argparse
 import sys
-import biolib.bioparser
+import biobrary
 
 
 def get_args(args_in):
@@ -153,7 +153,7 @@ def parse_gff_file(gff_file):
                         dt_out[contig][position][seq_type] = gff_dt[contig][source][seq_type][position]
         return dt_out
 
-    dt = biolib.bioparser.Gff_parser(gff_file)
+    dt = biobray.bioparser.Gff_parser(gff_file)
     dt = dt.data['information']
     dt_adepted = adept_dt_struc(dt)
     return dt_adepted

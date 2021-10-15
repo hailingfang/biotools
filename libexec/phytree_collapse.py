@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-from biolib.CircleNode import CircleNodeTree
+from biobrary.CircleNode import CircleNodeTree
 
 def getargs(args_in):
     parser = argparse.ArgumentParser(prog='phytree_collapse', description='utilit to \

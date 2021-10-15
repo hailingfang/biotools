@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-import biolib.bioparse
+from biobrary import bioparser
 
 def get_args():
     args = argparse.ArgumentParser(description='filter assembly result of spades \
@@ -33,7 +33,7 @@ def judge_cutoff(head_line, len_cutoff, coverage_cutoff):
 
 def main():
     fasta_file, len_cutoff, coverage_cutoff, file_out = get_args()
-    fasta_dt = fbio.fparse.Fasta_parse(fasta_file)
+    fasta_dt = bioparser.Fasta_parse(fasta_file)
     for head in fasta_dt.data:
         okornot = judge_cutoff(head, len_cutoff, coverage_cutoff)
         if okornot:

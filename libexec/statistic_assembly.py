@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse
-import biolib.bioparser
+import biobrary
 import os
 import sys
 
@@ -75,7 +75,7 @@ def main(name='statistic_assembly', args=None):
     if name == myname:
         assembly_file, f_out = get_args(args)
         for ff in assembly_file:
-            f_dt = fbio.fparser.Fasta_parser(ff)
+            f_dt = biobrary.bioparser.Fasta_parser(ff)
             f_dt = f_dt.data
             infors.append([os.path.basename(ff)] + stat_assembly(f_dt))
         print_res(infors, f_out)
