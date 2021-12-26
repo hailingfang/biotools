@@ -9,6 +9,9 @@ def getargs(args_in):
     parser = argparse.ArgumentParser(prog='phytree_show', description='show phylogeneitc\
         tree.')
     parser.add_argument('nwkfile', help='tree file name in newik format.')
+    parser.add_argument('-TF', "--tree_format", default=0, type=int, help="tree format, default is 0. 0: flexible with support values,\
+        1: flexible with internal node names, 2: all branches + leaf names + internal supports, 3: all branches + all names. and so on.\
+        detail please see http://etetoolkit.org/docs/latest/tutorial/tutorial_trees.html#reading-and-writing-newick-trees")
     parser.add_argument('-TM', '--tree_mode', choices=['c', 'r'], default='c', help='tree style mode.')
     parser.add_argument('-SBL', '--show_branch_length', action='store_true', help='show branch length')
     parser.add_argument('-SLN' ,'--show_leaf_name', action='store_true', help='show leaf name.')
@@ -21,11 +24,11 @@ def getargs(args_in):
         args = parser.parse_args()
     else:
         args = parser.parse_args(args_in)
-    nwkfile, tree_mode, show_leaf_name, show_branch_length, show_branch_support, align_leaf_name, \
-        hide_inner_node, save_plot, show_inner_name = args.nwkfile, args.tree_mode, args.show_leaf_name, \
+    nwkfile, tree_format, tree_mode, show_leaf_name, show_branch_length, show_branch_support, align_leaf_name, \
+        hide_inner_node, save_plot, show_inner_name = args.nwkfile, args.tree_format, args.tree_mode, args.show_leaf_name, \
         args.show_branch_length, args.show_branch_support, args.align_leaf_name, \
         args.hide_inner_node, args.save_plot, args.show_inner_name
-    return nwkfile, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
+    return nwkfile, tree_format, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
         align_leaf_name, hide_inner_node, save_plot, show_inner_name
 
 
@@ -47,7 +50,9 @@ def _hide_inner_node(tree):
     return 0
 
 
-def _show_inner_name(tree):
+def _show_inner_name(tree, tree_format):
+    if tree_format != 0:
+        return 0
     for node in tree.traverse():
         if (not node.is_leaf()) and (not node.is_root()):
             node_name_face = ete3.TextFace(node.name)
@@ -58,9 +63,9 @@ def _show_inner_name(tree):
 def main(name='phytree_show', args=None):
     myname = 'phytree_show'
     if name == myname:
-        nwkfile, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
+        nwkfile, tree_format, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
             align_leaf_name, hide_inner_node, save_plot, show_inner_name = getargs(args)
-        tree = ete3.TreeNode(nwkfile, format=1)
+        tree = ete3.TreeNode(nwkfile, format=tree_format)
         tree_style = ete3.TreeStyle()
         tree_style.mode = tree_mode
         tree_style.show_leaf_name = show_leaf_name
@@ -71,7 +76,7 @@ def main(name='phytree_show', args=None):
         if hide_inner_node:
             _hide_inner_node(tree)
         if show_inner_name:
-            _show_inner_name(tree)
+            _show_inner_name(tree, tree_format)
         try:
             if save_plot:
                 tree.render('plot.pdf', tree_style=tree_style)
