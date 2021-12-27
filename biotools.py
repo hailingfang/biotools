@@ -15,6 +15,7 @@ import libexec.phytree_statistic
 import libexec.phytree_cluster
 import libexec.phytree_collapse
 import libexec.phytree_show
+import libexec.phytree_setroot
 
 
 def getargs():
@@ -28,10 +29,11 @@ The flowing tools/subcommand was supported:
     * statistic_assembly
     * statistic_phytree
     * find_updown_elements
+    * phytree_setroot
+    * phytree_show
     * phytree_statistic
     * phytree_cluster
     * phytree_collapse
-    * phytree_show
 '''
     parser = argparse.ArgumentParser(prog='biotools')
     parser.add_argument('-V', '--version', action='version', version='%(prog)s 0.1')
@@ -52,10 +54,11 @@ The flowing tools/subcommand was supported:
     'statistic_assembly',
     'statistic_phytree',
     'find_updown_elements',
+    'phytree_setroot',
+    'phytree_show',
     'phytree_statistic',
     'phytree_cluster',
     'phytree_collapse',
-    'phytree_show'
     ]
     if cmd_name not in cmd_name_list:
         print('***error, tool not found***')
@@ -76,6 +79,7 @@ def main():
     libexec.phytree_collapse.main(cmd_name, cmd_args)
     libexec.phytree_statistic.main(cmd_name, cmd_args)
     libexec.phytree_show.main(cmd_name, cmd_args)
+    libexec.phytree_setroot.main(cmd_name, cmd_args)
     return 0
 
 
