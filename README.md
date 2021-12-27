@@ -6,7 +6,7 @@ Biotools is an integrated toolset for bioinformatics.
 * [Requirements](#Requirements)
 * [Install](#Install)
 * [Usage](#Usage)
-* [Example](#Example)
+* [Example](#Examples)
 ## Introduction
 Biotools is an integrated tool set for bioinformatics, it contain tools for formatting data, statistic bioinformatics data, handing phylogenetic tree et al. 
 
