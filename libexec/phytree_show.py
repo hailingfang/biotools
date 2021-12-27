@@ -20,16 +20,17 @@ def getargs(args_in):
     parser.add_argument('-AL', '--align_leaf_name', action='store_true', help='align leaf name')
     parser.add_argument('-HI', '--hide_inner_node', action='store_true', help='hide inner node point.')
     parser.add_argument('-SP', '--save_plot', action='store_true', help='save plot directly.')
+    parser.add_argument("-o", "--out_file", default="plot.pdf", help="file name of saved pdf.")
     if args_in == None:
         args = parser.parse_args()
     else:
         args = parser.parse_args(args_in)
     nwkfile, tree_format, tree_mode, show_leaf_name, show_branch_length, show_branch_support, align_leaf_name, \
-        hide_inner_node, save_plot, show_inner_name = args.nwkfile, args.tree_format, args.tree_mode, args.show_leaf_name, \
+        hide_inner_node, save_plot, show_inner_name, out_file = args.nwkfile, args.tree_format, args.tree_mode, args.show_leaf_name, \
         args.show_branch_length, args.show_branch_support, args.align_leaf_name, \
-        args.hide_inner_node, args.save_plot, args.show_inner_name
+        args.hide_inner_node, args.save_plot, args.show_inner_name, args.out_file
     return nwkfile, tree_format, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
-        align_leaf_name, hide_inner_node, save_plot, show_inner_name
+        align_leaf_name, hide_inner_node, save_plot, show_inner_name, out_file
 
 
 def _align_leaf_name(tree):
@@ -64,7 +65,7 @@ def main(name='phytree_show', args=None):
     myname = 'phytree_show'
     if name == myname:
         nwkfile, tree_format, tree_mode, show_leaf_name, show_branch_length, show_branch_support, \
-            align_leaf_name, hide_inner_node, save_plot, show_inner_name = getargs(args)
+            align_leaf_name, hide_inner_node, save_plot, show_inner_name, out_file = getargs(args)
         tree = ete3.TreeNode(nwkfile, format=tree_format)
         tree_style = ete3.TreeStyle()
         tree_style.mode = tree_mode
@@ -79,7 +80,7 @@ def main(name='phytree_show', args=None):
             _show_inner_name(tree, tree_format)
         try:
             if save_plot:
-                tree.render('plot.pdf', tree_style=tree_style)
+                tree.render(out_file, tree_style=tree_style)
             else:
                 tree.show(tree_style=tree_style)
         except:
