@@ -13,8 +13,8 @@ def getargs(args_in):
     parser_cluster.add_argument('treefile', help='phylogenetic tree file name in newike \
         format.')
     parser_cluster.add_argument('edge_len_cutoff', type=float, help='edge length to cluster.')
-    parser_cluster.add_argument('-cluster_result', default='cluster.fasta', help='file name of cluster result. default is cluster.fasta')
-    parser_cluster.add_argument('-collapse_tree', default='collapse_tree.nwk', help='file name of collapse tree. default is collapse_tree.nwk')
+    parser_cluster.add_argument('--cluster_result', default='cluster.fasta', help='file name of cluster result. default is cluster.fasta')
+    parser_cluster.add_argument('--collapse_tree', default='collapse_tree.nwk', help='file name of collapse tree. default is collapse_tree.nwk')
     parser_cluster_exclusive = parser_cluster.add_mutually_exclusive_group()
     parser_cluster_exclusive.add_argument('-LK', '--leaf_name_keep', default=None, help='file list, leaf name that want keep, \
         which can not coexist with "leaf_name_remove".')

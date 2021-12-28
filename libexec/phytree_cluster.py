@@ -10,9 +10,9 @@ def getargs(args_in):
     args.add_argument('treefile', type=str, help='file name of newike tree.')
     args.add_argument('edge_len_cutoff', type=float, help='cutoff of edge length to \
         make a circlal cluster.')
-    args.add_argument('-f_cluster_res', type=str, default='cluster.fasta', help='\
+    args.add_argument('--f_cluster_res', type=str, default='cluster.fasta', help='\
         file name to output cluster result, default is "cluster.fasta".')
-    args.add_argument('-f_profile_tree', type=str, default='profile.nwk', help='\
+    args.add_argument('--f_profile_tree', type=str, default='profile.nwk', help='\
         CircleNode Tree profile tree file. default is "profile.nwk".')
     if args_in == None:
         args =args.parse_args()
