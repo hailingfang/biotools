@@ -1,33 +1,34 @@
 # Biotools
-Biotools is an integrated toolset for bioinformatics.  
 
-## table of contents  
+## Table of contents  
 * [Introduction](#Introduction)
 * [Requirements](#Requirements)
 * [Install](#Install)
 * [Usage](#Usage)
 * [Example](#Examples)
 ## Introduction
-Biotools is an integrated tool set for bioinformatics, it contain tools for formatting data, statistic bioinformatics data, handing phylogenetic tree et al. 
+Biotools is an integrated tool set for bioinformatics, it contain tools for formatting data, doing statistics of bioinformatics data, handing phylogenetic tree et al. 
 
 ### 1. Phylogenic tree tools
 ![tree cluster and collapse](./img/tree_clustring.svg)
 * __Motivation__
-  When we operat big phlogenic tree(for example a tree have thousands of leave node),
-  analyse relationship of each node will be difficult if using GUI tools. And to drow this tree to a printable paper would be a problem too, may can print the tree using a A4 paper.
+
+  When we manipulate a big phlogenic tree (for example a tree have thousands of leave nodes),
+  analyseing the relationship of each node will be difficult if using GUI tools. And to drow this tree to a printable paper would be a problem too, may can not print the tree using a A4 paper clearly.
   So, I developed these tools to handle this problem.
 
+
 1. phytree_setroot    
-For a tree(stored by newick format), this tree may not set outgroup, and need to chose a node a outgruop node and root this tree. This tool is used doing this job, just give the tree file and name of outgroup node, the tool will output a tree file which have rooted.   
+For a tree(stored in newick format), which not set outgroup, and need to chose a node as outgruop node and root this tree. This tool is used doing this job, just give the tree file and name of outgroup node, the tool will output a tree file which is rooted.   
 
 2. phytree_show   
 This tool is used to show tree, and to have quick look of tree and save the figure in pdf format file.
 
 3. phytree_statistic  
-Show tree information, for example leaf which have longest branch, and average branch length of leaf. those information is usful when clustering or collapse tree.
+Show tree information, for example leaf which have longest branch, the average branch length of leaf. those information is usful when clustering or collapse the tree.
 
 4. phytree_cluster    
-A as in above figure, the tree node would be clustered into groups, and print the clusting result into file. Then those cluser can be used for downstream analysis.
+As showed in above figure, the tree node would be clustered into groups, and print the clusting result into file. Then those cluser can be used for downstream analysis.
 
 5. phytree_collapse    
 Same as phytree_cluster tool, and collapse node within a cluster into a new node(We called it a circle node), and generage a profile tree, which represent the circle node tree.
