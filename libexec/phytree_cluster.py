@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse
-from biobrary.CircleNode import CircleNodeTree
+from biobrary.tree import CircleNodeTree
 
 
 def getargs(args_in):

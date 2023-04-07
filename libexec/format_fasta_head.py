@@ -53,7 +53,7 @@ def getargs(args_in):
 
 
 def struc_fasta(fasta_file):
-    fasta_dt = biobrary.bioparser.Fasta_parser(fasta_file)
+    fasta_dt = biobrary.bioparse.Fasta_parser(fasta_file)
     fasta_dt = fasta_dt.data
     return fasta_dt
 

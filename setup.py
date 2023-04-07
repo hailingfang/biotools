@@ -4,9 +4,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='biotools',
-    version='0.1',
+    version='0.1.2',
     packages=find_packages(),
-    required_packages=['biolib'],
+    required_packages=['biobrary', 'ete3'],
     author='Benjamin Fang',
     author_email='benjaminfang.ol@outlook.com',
     descrition='tools collection for bioinformatics.',
