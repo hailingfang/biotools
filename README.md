@@ -7,16 +7,13 @@
 * [Usage](#Usage)
 * [Example](#Examples)
 ## Introduction
-Biotools is an integrated tool set for bioinformatics, it contain tools for formatting data, doing statistics of bioinformatics data, handing phylogenetic tree et al. 
+Biotools is an integrated toolset for bioinformatics. It contains tools for formatting data, performing statistical analyses on bioinformatics data, handling phylogenetic trees, and more. 
 
-### 1. Phylogenic tree tools
+### 1. Phylogenetic tree tool
 ![tree cluster and collapse](./img/tree_clustring.svg)
 * __Motivation__
 
-  When we manipulate a big phlogenic tree (for example a tree have thousands of leave nodes),
-  analyseing the relationship of each node will be difficult if using GUI tools. And to drow this tree to a printable paper would be a problem too, may can not print the tree using a A4 paper clearly.
-  So, I developed these tools to handle this problem.
-
+When manipulating a large phylogenetic tree, for example, one with thousands of leaf nodes, analyzing the relationships of each node becomes challenging when using GUI tools. Drawing this tree on printable paper is also problematic, as it may not be clear when printed on an A4-sized paper. Therefore, I developed these tools to address these issues.
 
 1. phytree_setroot    
 For a tree(stored in newick format), which not set outgroup, and need to chose a node as outgruop node and root this tree. This tool is used doing this job, just give the tree file and name of outgroup node, the tool will output a tree file which is rooted.   
