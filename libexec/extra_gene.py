@@ -5,8 +5,8 @@ import sys
 
 def getargs():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fasta_file", required=True, help="FASTA file")
-    parser.add_argument("--gtf_file", required=True, help="GTF file")
+    parser.add_argument("--fasta_file","-F", required=True, help="FASTA file")
+    parser.add_argument("--gtf_file", "-G", required=True, help="GTF file")
     parser.add_argument("gene_id", help="gene ID")
 
     args = parser.parse_args()
