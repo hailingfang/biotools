@@ -42,13 +42,21 @@ def main():
         exon_range = exon.get_range()
         exon_range = ';'.join([str(ele[0]) + ',' + str(ele[1]) for ele in exon_range])
         gbkey = exon.get_attr('gbkey')
+        biotype = exon.get_biotype()
         start = trans.get_start_codon()
         stop = trans.get_stop_codon()
         start_range = start.get_range()
         start_range = ';'.join([str(ele[0]) + ',' + str(ele[1]) for ele in start_range])
         stop_range = stop.get_range()
         stop_range = ';'.join([str(ele[0]) + ',' + str(ele[1]) for ele in stop_range])
-        print('\t'.join(['$' + trans_id, gbkey, exon_range, start_range, stop_range]))
+        biotype = gbkey if gbkey else biotype
+        if not biotype:
+            if trans.get_CDS():
+                biotype = 'mRNA'
+            else:
+                biotype = 'None'
+
+        print('\t'.join(['$' + trans_id, biotype, exon_range, start_range, stop_range]))
 
     entry = fasta.get_seq_entry(seq_name)
     seq = entry.get_seq()
